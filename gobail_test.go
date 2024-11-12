@@ -1,4 +1,4 @@
-package goclitem
+package gobail
 
 import "testing"
 

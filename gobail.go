@@ -1,3 +1,3 @@
-package goclitem
+package gobail
 
 var Exported = true
