@@ -1,6 +1,11 @@
 package gobail
 
-import "testing"
+import (
+	"testing"
+)
 
-func Test_Anything(t *testing.T) {
+func noError() error { return nil }
+
+func TestRunDoesNotExit(t *testing.T) {
+	Run(noError()).ExitMsg("there is not error")
 }
