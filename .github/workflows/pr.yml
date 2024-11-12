@@ -17,7 +17,7 @@ jobs:
       - name: Unit test
         run: make ci-test
       - name: Acceptance test
-        run: make build acceptance-test
+        run: make acceptance-test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         env:
