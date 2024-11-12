@@ -14,27 +14,10 @@ jobs:
         env:
           GO111MODULE: on
         with:
-          go-version: '1.16'
+          go-version: '1.23'
       - name: Test
         run: make ci-test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    needs: [ validate ]
-    steps:
-    - name: Check out code
-      uses: actions/checkout@master
-    - name: Install Deps
-      run: make build-deps
-      env:
-        GO111MODULE: on
-    - name: Perform release
-      run: make release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GO111MODULE: on
-      if: success()

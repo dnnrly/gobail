@@ -24,14 +24,14 @@ Use the `-d` option to see what will be modified without changing any files.
 
 One Paragraph of project description goes here
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dnnrly/goclitem)](https://github.com/dnnrly/goclitem/releases/latest)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dnnrly/goclitem/Release%20workflow)](https://github.com/dnnrly/goclitem/actions?query=workflow%3A%22Release+workflow%22)
-[![report card](https://goreportcard.com/badge/github.com/dnnrly/goclitem)](https://goreportcard.com/report/github.com/dnnrly/goclitem)
-[![godoc](https://godoc.org/github.com/dnnrly/goclitem?status.svg)](http://godoc.org/github.com/dnnrly/goclitem)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dnnrly/gobail)](https://github.com/dnnrly/gobail/releases/latest)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dnnrly/gobail/Release%20workflow)](https://github.com/dnnrly/gobail/actions?query=workflow%3A%22Release+workflow%22)
+[![report card](https://goreportcard.com/badge/github.com/dnnrly/gobail)](https://goreportcard.com/report/github.com/dnnrly/gobail)
+[![godoc](https://godoc.org/github.com/dnnrly/gobail?status.svg)](http://godoc.org/github.com/dnnrly/gobail)
 
-![GitHub watchers](https://img.shields.io/github/watchers/dnnrly/goclitem?style=social)
-![GitHub stars](https://img.shields.io/github/stars/dnnrly/goclitem?style=social)
-[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fdnnrly%2Fgoclitem)](https://twitter.com/intent/tweet?url=https://github.com/dnnrly/goclitem)
+![GitHub watchers](https://img.shields.io/github/watchers/dnnrly/gobail?style=social)
+![GitHub stars](https://img.shields.io/github/stars/dnnrly/gobail?style=social)
+[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fdnnrly%2Fgobail)](https://twitter.com/intent/tweet?url=https://github.com/dnnrly/gobail)
 
 
 ## Getting Started
@@ -49,8 +49,8 @@ Give examples
 ### Installing
 
 ```bash
-$ git clone http://github.com/dnnrly/goclitem.git
-$ cd goclitem
+$ git clone http://github.com/dnnrly/gobail.git
+$ cd gobail
 $ make install
 ```
 
@@ -87,13 +87,13 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/dnnrly/goclitem/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/dnnrly/gobail/tags). 
 
 ## Authors
 
 * **Your name here** - *Initial work* - [dnnrly](https://github.com/dnnrly)
 
-See also the list of [contributors](https://github.com/dnnrly/goclitem/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/dnnrly/gobail/contributors) who participated in this project.
 
 ## License
 
