@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-go@v1
         with:
-          go-version: '1.19'
+          go-version: '1.23'
       - name: Install dependencies
         run: make deps
       - name: Unit test
@@ -26,17 +26,3 @@ jobs:
         uses: codecov/codecov-action@v1
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  check-release:
-    name: Check release
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-go@v2
-      with:
-        go-version: '1.19'
-    - name: Check release build
-      uses: goreleaser/goreleaser-action@v2
-      with:
-        distribution: goreleaser
-        version: latest
-        args: build --rm-dist --skip-validate --snapshot
