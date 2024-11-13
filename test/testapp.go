@@ -25,6 +25,7 @@ func return2ValAndError() (int, string, error) {
 func main() {
 	fmt.Println("Test case is: " + os.Args[1])
 	switch os.Args[1] {
+	// Exit
 	case "exit-no-return":
 		gobail.Run(returnError()).ExitMsg("exited with an error: %v")
 	case "exit-no-return-without-error":
@@ -37,5 +38,19 @@ func main() {
 		gobail.Return2(return2ValAndError()).ExitMsg("exited with an error: %v")
 	case "exit-return2-without-error":
 		gobail.Return2(return2ValAndError()).ExitMsg("exited with an error")
+
+	// Panic
+	case "panic-no-return":
+		gobail.Run(returnError()).PanicMsg("exited with an error: %v")
+	case "panic-no-return-without-error":
+		gobail.Run(returnError()).PanicMsg("exited with an error")
+	case "panic-return":
+		gobail.Return(returnValAndError()).PanicMsg("exited with an error: %v")
+	case "panic-return-without-error":
+		gobail.Return(returnValAndError()).PanicMsg("exited with an error")
+	case "panic-return2":
+		gobail.Return2(return2ValAndError()).PanicMsg("exited with an error: %v")
+	case "panic-return2-without-error":
+		gobail.Return2(return2ValAndError()).PanicMsg("exited with an error")
 	}
 }

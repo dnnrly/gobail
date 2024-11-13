@@ -21,12 +21,26 @@ func (e baseEvaluator) doExit(msg string) {
 	}
 }
 
+func (e baseEvaluator) doPanic(msg string) {
+	if e.err != nil {
+		if strings.Contains(msg, "%v") {
+			panic(fmt.Sprintf(msg, e.err))
+		} else {
+			panic(msg)
+		}
+	}
+}
+
 type runEvaluator struct {
 	baseEvaluator
 }
 
 func (e runEvaluator) ExitMsg(msg string) {
 	e.doExit(msg)
+}
+
+func (e runEvaluator) PanicMsg(msg string) {
+	e.doPanic(msg)
 }
 
 func Run(err error) runEvaluator {
@@ -45,6 +59,11 @@ func (e returnEvaluator[R]) ExitMsg(msg string) R {
 	return e.ret
 }
 
+func (e returnEvaluator[R]) PanicMsg(msg string) R {
+	e.doPanic(msg)
+	return e.ret
+}
+
 func Return[R any](ret R, err error) returnEvaluator[R] {
 	return returnEvaluator[R]{
 		baseEvaluator: baseEvaluator{err},
@@ -60,7 +79,11 @@ type return2Evaluator[R, S any] struct {
 
 func (e return2Evaluator[R, S]) ExitMsg(msg string) (R, S) {
 	e.doExit(msg)
+	return e.ret1, e.ret2
+}
 
+func (e return2Evaluator[R, S]) PanicMsg(msg string) (R, S) {
+	e.doPanic(msg)
 	return e.ret1, e.ret2
 }
 

@@ -24,3 +24,18 @@ func TestReturn2DoesNotExit(t *testing.T) {
 	assert.Equal(t, result1, "some string")
 	assert.Equal(t, result2, 9)
 }
+
+func TestRunDoesNotPanic(t *testing.T) {
+	Run(noError()).PanicMsg("there is not error")
+}
+
+func TestReturnDoesNotPanic(t *testing.T) {
+	result := Return(noReturnError()).PanicMsg("there is not error")
+	assert.Equal(t, result, "some string")
+}
+
+func TestReturn2DoesNotPanic(t *testing.T) {
+	result1, result2 := Return2(noReturn2Error()).PanicMsg("there is not error")
+	assert.Equal(t, result1, "some string")
+	assert.Equal(t, result2, 9)
+}
