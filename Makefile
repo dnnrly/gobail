@@ -40,7 +40,7 @@ acceptance-test: ## run acceptance tests against the build gobailrm -rf ./test/t
 
 .PHONY: ci-test
 ci-test: ## ci target - run tests to generate coverage data
-	$(GO_BIN) test -race -coverprofile=coverage.txt -covermode=atomic ./...
+	$(GO_BIN) test -race -cover ./...
 
 .PHONY: lint
 lint: ## run linting
@@ -49,4 +49,4 @@ lint: ## run linting
 .PHONY: coverage-report
 coverage-report: ## collate the coverage data
 	mkdir -p tmp/coverage
-	go tool covdata textfmt -i=test/tmp/coverage -o ./tmp/coverage/acceptance.txt
+	go tool covdata textfmt -i=test/tmp/coverage,tmp/coverage -o ./coverage.txt
