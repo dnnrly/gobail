@@ -23,17 +23,27 @@ func return2ValAndError() (int, string, error) {
 }
 
 func main() {
+	if len(os.Args) < 2 {
+		fmt.Println("No arguments provided")
+		os.Exit(0)
+	}
 	fmt.Println("Test case is: " + os.Args[1])
 
 	defer func() {
 		if r := recover(); r != nil {
 			fmt.Println("Recovered panic:", r)
+			os.Exit(1)
 		}
-		os.Exit(1)
 	}()
 
 	switch os.Args[1] {
 	// Exit
+	case "exit-no-return-no-msg":
+		gobail.Run(returnError()).OrExit()
+	case "exit-return-no-msg":
+		gobail.Run(returnError()).OrExit()
+	case "exit-return2-no-msg":
+		gobail.Run(returnError()).OrExit()
 	case "exit-no-return":
 		gobail.Run(returnError()).OrExitMsg("exited with an error: %v")
 	case "exit-no-return-without-error":
@@ -48,6 +58,12 @@ func main() {
 		gobail.Return2(return2ValAndError()).OrExitMsg("exited with an error")
 
 	// Panic
+	case "panic-no-return-no-msg":
+		gobail.Run(returnError()).OrPanic()
+	case "panic-return-no-msg":
+		gobail.Run(returnError()).OrPanic()
+	case "panic-return2-no-msg":
+		gobail.Run(returnError()).OrPanic()
 	case "panic-no-return":
 		gobail.Run(returnError()).OrPanicMsg("exited with an error: %v")
 	case "panic-no-return-without-error":

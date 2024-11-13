@@ -35,8 +35,16 @@ type runEvaluator struct {
 	baseEvaluator
 }
 
+func (e runEvaluator) OrExit() {
+	e.doExit("")
+}
+
 func (e runEvaluator) OrExitMsg(msg string) {
 	e.doExit(msg)
+}
+
+func (e runEvaluator) OrPanic() {
+	e.doPanic("")
 }
 
 func (e runEvaluator) OrPanicMsg(msg string) {
@@ -54,8 +62,18 @@ type returnEvaluator[R any] struct {
 	ret R
 }
 
+func (e returnEvaluator[R]) OrExit() R {
+	e.doExit("")
+	return e.ret
+}
+
 func (e returnEvaluator[R]) OrExitMsg(msg string) R {
 	e.doExit(msg)
+	return e.ret
+}
+
+func (e returnEvaluator[R]) OrPanic() R {
+	e.doPanic("")
 	return e.ret
 }
 
@@ -77,8 +95,18 @@ type return2Evaluator[R, S any] struct {
 	ret2 S
 }
 
+func (e return2Evaluator[R, S]) OrExit() (R, S) {
+	e.doExit("")
+	return e.ret1, e.ret2
+}
+
 func (e return2Evaluator[R, S]) OrExitMsg(msg string) (R, S) {
 	e.doExit(msg)
+	return e.ret1, e.ret2
+}
+
+func (e return2Evaluator[R, S]) OrPanic() (R, S) {
+	e.doPanic("")
 	return e.ret1, e.ret2
 }
 
