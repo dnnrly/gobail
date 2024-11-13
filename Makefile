@@ -46,3 +46,7 @@ ci-test: ## ci target - run tests to generate coverage data
 lint: ## run linting
 	golangci-lint run
 
+.PHONY: coverage-report
+coverage-report: ## collate the coverage data
+	mkdir -p tmp/coverage
+	go tool covdata textfmt -i=test/tmp/coverage -o ./tmp/coverage/acceptance.txt
