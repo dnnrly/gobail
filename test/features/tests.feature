@@ -1,24 +1,27 @@
 Feature: Error cases
 
-    Scenario: Exits gobail.Run
-        When the app runs with parameters "exit-no-return"
+    Scenario Outline: Exits with error
+        When the app runs with parameters "<parameter>"
         Then the app exits with an error
+        And the app output does not contain "panic:"
         And the app output contains "exited with an error: there was an error"
 
-    Scenario: Exits gobail.Run without adding error
-        When the app runs with parameters "exit-no-return-without-error"
+        Examples:
+            | parameter      |
+            | exit-no-return |
+            | exit-return    |
+            | exit-return2   |
+
+
+    Scenario Outline: Exits without adding error
+        When the app runs with parameters "<parameter>"
         Then the app exits with an error
+        And the app output does not contain "panic:"
         And the app output contains "exited with an error"
         And the app output does not contain "there was an error"
 
-    Scenario: Exits gobail.Return
-        When the app runs with parameters "exit-return"
-        Then the app exits with an error
-        And the app output contains "exited with an error: there was an error"
-
-    Scenario: Exits gobail.Return without adding error
-        When the app runs with parameters "exit-return-without-error"
-        Then the app exits with an error
-        And the app output contains "exited with an error"
-        And the app output does not contain "there was an error"
-        
+        Examples:
+            | parameter                    |
+            | exit-no-return-without-error |
+            | exit-return-without-error    |
+            | exit-return2-without-error   |
