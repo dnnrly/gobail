@@ -24,6 +24,14 @@ func return2ValAndError() (int, string, error) {
 
 func main() {
 	fmt.Println("Test case is: " + os.Args[1])
+
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered panic:", r)
+		}
+		os.Exit(1)
+	}()
+
 	switch os.Args[1] {
 	// Exit
 	case "exit-no-return":
