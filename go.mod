@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/cucumber/godog v0.15.0
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
