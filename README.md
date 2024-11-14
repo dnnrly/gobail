@@ -1,28 +1,6 @@
-# Go CLI Template
+# GoBail
 
-This is a template for Go CLI tools. Major features are:
-
-1. Setup script
-2. Release build action
-3. PR validation action
-4. Code of Conduct
-5. Basic security policy
-6. Modules enabled
-7. Rudimentary accepance tests
-
-## Setup
-
-1. Create a new repo from this template
-2. `$ ./setup.sh`
-3. Follow the prompts
-
-Use the `-d` option to see what will be modified without changing any files.
-
-**You can delete everything above this line afterwards.**
-
-# Project Title
-
-One Paragraph of project description goes here
+Exit immediately your app when you see an error.
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dnnrly/gobail)](https://github.com/dnnrly/gobail/releases/latest)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dnnrly/gobail/Release%20workflow)](https://github.com/dnnrly/gobail/actions?query=workflow%3A%22Release+workflow%22)
@@ -33,25 +11,29 @@ One Paragraph of project description goes here
 ![GitHub stars](https://img.shields.io/github/stars/dnnrly/gobail?style=social)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fdnnrly%2Fgobail)](https://twitter.com/intent/tweet?url=https://github.com/dnnrly/gobail)
 
+Sometimes when your app encounters an error, it can't be recovered from and the only option is to exit immediately. It doesn't always make sense to pass the error all the way back to the your error handling, just so you can print a string to the console - you just want to exit now. This library makes it easy to do exactly that using a fluent API. I've also made sure that the library is fully tested and validated so that you don't have to. It may sound like a lot of effort but it's important to make sure that there are no nasty suprises - and have evidence that you made sure.
 
-## Getting Started
+Using this library allows you to safely exit with a non-zero code or just panic when you need to, without without having to worry about complex test code to raise your code coverage metrics.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Using `gobail`
 
-### Prerequisites
+```go
+package main
 
-What things you need to install the software and how to install them
+import "github.com/dnnrly/gobail"
 
-```
-Give examples
-```
+var err = errors.New("an error")
 
-### Installing
+func returnError() error                        { return err }
+func returnValAndError() (int, error)           { return 0, err }
+func return2ValsAndError() (int, string, error) { return 0, "str", err }
 
-```bash
-$ git clone http://github.com/dnnrly/gobail.git
-$ cd gobail
-$ make install
+func main() {
+    // Take a look at the package documentation for more details
+    gobail.Run(returnError()).OrExit()
+    result := gobail.Return(returnValAndError()).OrPanic()
+    result1, result2 := gobail.Return(return2ValsAndError()).OrExitMsg("something went wrong: %v")
+}
 ```
 
 ### Running Unit Tests
@@ -63,22 +45,16 @@ $ make test
 ### Running Acceptance tests
 
 ```bash
-$ make deps
-$ make build acceptance-test
+$ make acceptance-test
 ```
 
 ## Important `make` targets
 
-* `deps` - downloads all of the deps you need to build, test, and release
-* `install` - installs your application
-* `build` - builds your application
 * `test` - runs unit tests
 * `ci-test` - run tests for CI validation
 * `acceptance-test` - run the acceptance tests
 * `lint` -  run linting
-* `update` - update Go dependencies
 * `clean` - clean project dependencies
-* `clean-deps` - remove all of the build dependencies too
 
 
 ## Contributing
@@ -91,14 +67,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Your name here** - *Initial work* - [dnnrly](https://github.com/dnnrly)
+* **Pascal Dennerly** - *Original library author* - [dnnrly](https://github.com/dnnrly)
 
 See also the list of [contributors](https://github.com/dnnrly/gobail/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details
-
-## Acknowledgments
-
-* Important people here

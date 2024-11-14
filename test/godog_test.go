@@ -46,8 +46,11 @@ func InitializeScenario(ctx *godog.ScenarioContext) {
 
 		return ctx, nil
 	})
+	ctx.Step(`^the app runs without parameters$`, tc.theAppRunsWithoutParameters)
 	ctx.Step(`^the app runs with parameters "(.*)"$`, tc.theAppRunsWithParameters)
+	ctx.Step(`^the app exits without error$`, tc.theAppExitsWithoutError)
 	ctx.Step(`^the app exits with an error$`, tc.theAppExitsWithAnError)
 	ctx.Step(`^the app output contains "(.*)"$`, tc.theAppOutputContains)
 	ctx.Step(`^the app output does not contain "(.*)"$`, tc.theAppOutputDoesNotContain)
+	ctx.Step(`^the app output has (\d) lines?$`, tc.theAppOutputHasLines)
 }

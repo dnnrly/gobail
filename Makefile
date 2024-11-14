@@ -21,9 +21,11 @@ help:   ## Show this help.
 
 .PHONY: clean
 clean: ## remove build artifacts and release directories
+	rm -f coverage.txt
 	rm -f $(NAME)
-	rm -rf dist/
-	rm -rf cmd/$(NAME)/dist
+	rm -rf $(TMP_DIR)
+	rm -rf ./test/tmp
+	rm -rf ./test/testapp
 
 .PHONY: deps
 deps: build-deps test-deps ## ci target - install all runtime dependencies
@@ -40,9 +42,15 @@ acceptance-test: ## run acceptance tests against the build gobailrm -rf ./test/t
 
 .PHONY: ci-test
 ci-test: ## ci target - run tests to generate coverage data
-	$(GO_BIN) test -race -coverprofile=coverage.txt -covermode=atomic ./...
+	mkdir -p ./tmp/coverage
+	$(GO_BIN) test -cover -test.gocoverdir=tmp/coverage ./...
 
 .PHONY: lint
 lint: ## run linting
 	golangci-lint run
 
+.PHONY: coverage-report
+coverage-report: ## collate the coverage data
+	mkdir -p tmp/coverage
+	go tool covdata textfmt -i=tmp/coverage,test/tmp/coverage -o ./coverage.txt
+	sed -i -e '/testapp/d' coverage.txt

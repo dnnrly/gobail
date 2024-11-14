@@ -30,6 +30,16 @@ func (c *testContext) Errorf(format string, args ...interface{}) {
 	c.err = fmt.Errorf(format, args...)
 }
 
+func (c *testContext) theAppRunsWithoutParameters() error {
+	cmd := exec.Command("./testapp")
+	output, err := cmd.CombinedOutput()
+	c.cmdResult.Output = string(output)
+	c.cmdResult.Err = err
+	c.cmdResult.ProcessState = cmd.ProcessState
+
+	return nil
+}
+
 func (c *testContext) theAppRunsWithParameters(args string) error {
 	c.cmdInput.parameters = args
 	cmdArgs := strings.Split(args, " ")
@@ -40,6 +50,11 @@ func (c *testContext) theAppRunsWithParameters(args string) error {
 	c.cmdResult.ProcessState = cmd.ProcessState
 
 	return nil
+}
+
+func (c *testContext) theAppExitsWithoutError() error {
+	assert.NoError(c, c.cmdResult.Err)
+	return c.err
 }
 
 func (c *testContext) theAppExitsWithAnError() error {
@@ -56,5 +71,14 @@ func (c *testContext) theAppOutputContains(expected string) error {
 func (c *testContext) theAppOutputDoesNotContain(unexpected string) error {
 	unexpected = strings.ReplaceAll(unexpected, "\\\"", "\"")
 	assert.NotContains(c, c.cmdResult.Output, unexpected)
+	return c.err
+}
+
+func (c *testContext) theAppOutputHasLines(expected int) error {
+	lines := strings.Split(c.cmdResult.Output, "\n")
+	// Remove the empty line at the end
+	lines = lines[:len(lines)-1]
+
+	assert.Len(c, lines, expected)
 	return c.err
 }
