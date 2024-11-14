@@ -10,17 +10,9 @@ import (
 
 var err = errors.New("there was an error")
 
-func returnError() error {
-	return err
-}
-
-func returnValAndError() (int, error) {
-	return 0, err
-}
-
-func return2ValAndError() (int, string, error) {
-	return 0, "str", err
-}
+func returnError() error                        { return err }
+func returnValAndError() (int, error)           { return 0, err }
+func return2ValsAndError() (int, string, error) { return 0, "str", err }
 
 func main() {
 	if len(os.Args) < 2 {
@@ -53,9 +45,9 @@ func main() {
 	case "exit-return-without-error":
 		gobail.Return(returnValAndError()).OrExitMsg("exited with an error")
 	case "exit-return2":
-		gobail.Return2(return2ValAndError()).OrExitMsg("exited with an error: %v")
+		gobail.Return2(return2ValsAndError()).OrExitMsg("exited with an error: %v")
 	case "exit-return2-without-error":
-		gobail.Return2(return2ValAndError()).OrExitMsg("exited with an error")
+		gobail.Return2(return2ValsAndError()).OrExitMsg("exited with an error")
 
 	// Panic
 	case "panic-no-return-no-msg":
@@ -73,8 +65,8 @@ func main() {
 	case "panic-return-without-error":
 		gobail.Return(returnValAndError()).OrPanicMsg("exited with an error")
 	case "panic-return2":
-		gobail.Return2(return2ValAndError()).OrPanicMsg("exited with an error: %v")
+		gobail.Return2(return2ValsAndError()).OrPanicMsg("exited with an error: %v")
 	case "panic-return2-without-error":
-		gobail.Return2(return2ValAndError()).OrPanicMsg("exited with an error")
+		gobail.Return2(return2ValsAndError()).OrPanicMsg("exited with an error")
 	}
 }

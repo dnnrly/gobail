@@ -31,92 +31,116 @@ func (e baseEvaluator) doPanic(msg string) {
 	}
 }
 
-type runEvaluator struct {
+// RunEvaluator handles functions with no return value
+type RunEvaluator struct {
 	baseEvaluator
 }
 
-func (e runEvaluator) OrExit() {
+// OrExit exits the application without an error message if there is an error
+func (e RunEvaluator) OrExit() {
 	e.doExit("")
 }
 
-func (e runEvaluator) OrExitMsg(msg string) {
+// OrExitMsg exits the application with an error message if there is an error
+// You may use the %v placeholder to include the error in the message
+func (e RunEvaluator) OrExitMsg(msg string) {
 	e.doExit(msg)
 }
 
-func (e runEvaluator) OrPanic() {
+// OrPanic panics without an error message if there is an error
+func (e RunEvaluator) OrPanic() {
 	e.doPanic("")
 }
 
-func (e runEvaluator) OrPanicMsg(msg string) {
+// OrPanicMsg exits the application with an error message if there is an error
+// You may use the %v placeholder to include the error in the message
+func (e RunEvaluator) OrPanicMsg(msg string) {
 	e.doPanic(msg)
 }
 
-func Run(err error) runEvaluator {
-	return runEvaluator{
+// Run collects the error for evaluation in the OrExit or OrPanic methods
+func Run(err error) RunEvaluator {
+	return RunEvaluator{
 		baseEvaluator: baseEvaluator{err},
 	}
 }
 
-type returnEvaluator[R any] struct {
+// RunEvaluator handles functions with 1 return value
+type ReturnEvaluator[R any] struct {
 	baseEvaluator
 	ret R
 }
 
-func (e returnEvaluator[R]) OrExit() R {
+// OrExit exits the application without an error message if there is an error, returning the value of the function if there is no error
+func (e ReturnEvaluator[R]) OrExit() R {
 	e.doExit("")
 	return e.ret
 }
 
-func (e returnEvaluator[R]) OrExitMsg(msg string) R {
+// OrExitMsg exits the application with an error message if there is an error, returning the value of the function if there is no error
+// You may use the %v placeholder to include the error in the message
+func (e ReturnEvaluator[R]) OrExitMsg(msg string) R {
 	e.doExit(msg)
 	return e.ret
 }
 
-func (e returnEvaluator[R]) OrPanic() R {
+// OrPanic panics without an error message if there is an error, returning the value of the function if there is no error
+func (e ReturnEvaluator[R]) OrPanic() R {
 	e.doPanic("")
 	return e.ret
 }
 
-func (e returnEvaluator[R]) OrPanicMsg(msg string) R {
+// OrPanicMsg exits the application with an error message if there is an error, returning the value of the function if there is no error
+// You may use the %v placeholder to include the error in the message
+func (e ReturnEvaluator[R]) OrPanicMsg(msg string) R {
 	e.doPanic(msg)
 	return e.ret
 }
 
-func Return[R any](ret R, err error) returnEvaluator[R] {
-	return returnEvaluator[R]{
+// Return collects the error and other return value for evaluation in the OrExit or OrPanic methods
+func Return[R any](ret R, err error) ReturnEvaluator[R] {
+	return ReturnEvaluator[R]{
 		baseEvaluator: baseEvaluator{err},
 		ret:           ret,
 	}
 }
 
-type return2Evaluator[R, S any] struct {
+// RunEvaluator handles functions with 2 return values
+type Return2Evaluator[R, S any] struct {
 	baseEvaluator
 	ret1 R
 	ret2 S
 }
 
-func (e return2Evaluator[R, S]) OrExit() (R, S) {
+// OrExit exits the application without an error message if there is an error, returning the values of the function if there is no error
+func (e Return2Evaluator[R, S]) OrExit() (R, S) {
 	e.doExit("")
 	return e.ret1, e.ret2
 }
 
-func (e return2Evaluator[R, S]) OrExitMsg(msg string) (R, S) {
+// OrExitMsg exits the application with an error message if there is an error, returning the values of the function if there is no error
+// You may use the %v placeholder to include the error in the message
+func (e Return2Evaluator[R, S]) OrExitMsg(msg string) (R, S) {
 	e.doExit(msg)
 	return e.ret1, e.ret2
 }
 
-func (e return2Evaluator[R, S]) OrPanic() (R, S) {
+// OrPanic panics without an error message if there is an error, returning the values of the function if there is no error
+func (e Return2Evaluator[R, S]) OrPanic() (R, S) {
 	e.doPanic("")
 	return e.ret1, e.ret2
 }
 
-func (e return2Evaluator[R, S]) OrPanicMsg(msg string) (R, S) {
+// OrPanicMsg exits the application with an error message if there is an error, returning the values of the function if there is no error
+// You may use the %v placeholder to include the error in the message
+func (e Return2Evaluator[R, S]) OrPanicMsg(msg string) (R, S) {
 	e.doPanic(msg)
 	return e.ret1, e.ret2
 }
 
-func Return2[R, S any](ret1 R, ret2 S, err error) return2Evaluator[R, S] {
-	return return2Evaluator[R, S]{
+// Return2 collects the error and other return values for evaluation in the OrExit or OrPanic methods
+func Return2[R, S any](ret1 R, ret2 S, err error) Return2Evaluator[R, S] {
+	return Return2Evaluator[R, S]{
 		baseEvaluator: baseEvaluator{err},
 		ret1:          ret1,
 		ret2:          ret2,
