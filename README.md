@@ -3,7 +3,6 @@
 Exit immediately your app when you see an error.
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dnnrly/gobail)](https://github.com/dnnrly/gobail/releases/latest)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dnnrly/gobail/Release%20workflow)](https://github.com/dnnrly/gobail/actions?query=workflow%3A%22Release+workflow%22)
 [![report card](https://goreportcard.com/badge/github.com/dnnrly/gobail)](https://goreportcard.com/report/github.com/dnnrly/gobail)
 [![godoc](https://godoc.org/github.com/dnnrly/gobail?status.svg)](http://godoc.org/github.com/dnnrly/gobail)
 
