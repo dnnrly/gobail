@@ -1,6 +1,6 @@
 # GoBail
 
-Exit immediately your app when you see an error.
+Exit your app immediately when you get an error. We tested exiting and panicking in your code do you don't have to.
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dnnrly/gobail)](https://github.com/dnnrly/gobail/releases/latest)
 [![report card](https://goreportcard.com/badge/github.com/dnnrly/gobail)](https://goreportcard.com/report/github.com/dnnrly/gobail)
