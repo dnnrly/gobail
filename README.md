@@ -3,6 +3,7 @@
 Exit your app immediately when you get an error. We tested exiting and panicking in your code do you don't have to.
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/dnnrly/gobail)](https://github.com/dnnrly/gobail/releases/latest)
+[![codecov](https://codecov.io/gh/dnnrly/gobail/graph/badge.svg?token=BhZ7SKB3Zo)](https://codecov.io/gh/dnnrly/gobail)
 [![report card](https://goreportcard.com/badge/github.com/dnnrly/gobail)](https://goreportcard.com/report/github.com/dnnrly/gobail)
 [![godoc](https://godoc.org/github.com/dnnrly/gobail?status.svg)](http://godoc.org/github.com/dnnrly/gobail)
 
