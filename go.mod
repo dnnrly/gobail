@@ -3,7 +3,7 @@ module github.com/dnnrly/gobail
 go 1.23
 
 require (
-	github.com/cucumber/godog v0.15.0
+	github.com/cucumber/godog v0.15.1
 	github.com/stretchr/testify v1.11.1
 )
 
@@ -16,6 +16,6 @@ require (
 	github.com/hashicorp/go-memdb v1.3.4 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
